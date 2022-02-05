@@ -106,6 +106,8 @@ def runbacktest(datapath, start, end, params, strategy, commission_val=None, por
 
     cerebro.addanalyzer(bt.analyzers.TradeAnalyzer, _name="ta")
     cerebro.addanalyzer(bt.analyzers.SQN, _name="sqn")
+    cerebro.addanalyzer(bt.analyzers.SharpeRatio, _name="sr")
+    cerebro.addanalyzer(bt.analyzers.DrawDown, _name="dd")
 
     strat = cerebro.run()
     stratexe = strat[0]
@@ -117,8 +119,14 @@ def runbacktest(datapath, start, end, params, strategy, commission_val=None, por
 
     sqn = getSQN(stratexe.analyzers.sqn.get_analysis())
 
+    sharpe = stratexe.analyzers.sr.get_analysis()['sharperatio']
+
+    drawdown = stratexe.analyzers.dd.get_analysis()['max']['drawdown']
+
+
+
 
     if plt:
         cerebro.plot()
 
-    return cerebro.broker.getvalue(), totalwin, totalloss, pnl_net, sqn
+    return cerebro.broker.getvalue(), totalwin, totalloss, pnl_net, sqn, sharpe, drawdown
