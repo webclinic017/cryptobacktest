@@ -4,8 +4,8 @@ from binance.enums import HistoricalKlinesType
 
 client = Client("", "")
 
-timeframes = ['5m','15m']
-pairs = ['DOGEUSDT','ADAUSDT','MATICUSDT']
+timeframes = ['1m','3m', '5m']
+pairs = ['ETHUSDT','BTCUSDT','DOGEUSDT','LINKUSDT']
 #pairs = ['DOGEUSDT','ADAUSDT','MATICUSDT']
 for pair in pairs:
     for time in timeframes:
@@ -13,7 +13,7 @@ for pair in pairs:
         candlestick_writer = csv.writer(csvfile, delimiter=',')
 
 
-        candlesticks = client.get_historical_klines(pair, time, "1 Aug, 2021", "31 Jan, 2022",klines_type=HistoricalKlinesType.FUTURES)
+        candlesticks = client.get_historical_klines(pair, time, "17 June, 2022", "17 Sept, 2022",klines_type=HistoricalKlinesType.FUTURES)
 
         for candlestick in candlesticks:
             candlestick[0] = candlestick[0] / 1000 # divide timestamp to ignore miliseconds
