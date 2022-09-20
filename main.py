@@ -6,30 +6,30 @@ from backtest import runbacktest
 import sys
 
 
-commission_val = 0.04 
-portofolio = 100
+commission_val = 0.01 
+portofolio = 100000
 stake_val = 1
 quantity = 0.5
 
-start = '2022-08-17'
+start = '2022-06-17'
 end = '2022-09-17'
 strategies = [
-    #           {
-    #  "name":"StochRSIStrategy",
-    #  "value":CustomStochRSIStrategy,
-    #  "params":{
-    #      "short_period":[13,14,15,20,21,22],
-    #      "long_period":[13,14,15,20,21,22],
-    #      "ema_period":range(50,200,50),
-    #  }
-    # }
-    {
-        "name":"ScalpingStrat1",
-        "value":ScalpingStrat1,
-        "params":{
-            "ema":[20]
-        }
+              {
+     "name":"StochRSIStrategy",
+     "value":CustomStochRSIStrategy,
+     "params":{
+         "short_period":[13,14,15,20,21,22],
+         "long_period":[13,14,15,20,21,22],
+         "ema_period":range(50,200,50),
+     }
     }
+    # {
+    #     "name":"ScalpingStrat1",
+    #     "value":ScalpingStrat1,
+    #     "params":{
+    #         "ema":[20]
+    #     }
+    # }
     # {
     #     "name":"CipherBv2",
     #     "value":CipherBv2,

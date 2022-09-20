@@ -69,6 +69,12 @@ def getSQN(analyzer):
     return round(analyzer.sqn,2)
 
 
+class CommInfoFractional(bt.CommissionInfo):
+    def getsize(self, price, cash):
+        '''Returns fractional size for cash operation @price'''
+        return 1 * (cash / price)
+
+
 
 def runbacktest(datapath, start, end, params, strategy, commission_val=None, portofolio=10000.0, stake_val=1, quantity=0.01, plt=False):
 
@@ -82,6 +88,8 @@ def runbacktest(datapath, start, end, params, strategy, commission_val=None, por
 
     if commission_val:
         cerebro.broker.setcommission(commission=commission_val/100) # divide by 100 to remove the %
+
+    cerebro.broker.addcommissioninfo(CommInfoFractional())
 
 
     cerebro.addstrategy(strategy, params=params, quantity=quantity)
